@@ -11,9 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure DbContext with SQL Server
+//// Configure DbContext with SQL Server
+//builder.Services.AddDbContext<BudgetTrackerDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure DbContext with SQLite for simplicity
 builder.Services.AddDbContext<BudgetTrackerDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite("Data Source=budgettracker.db"));
 
 // Register the repository
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
@@ -38,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // Enable CORS
 app.UseCors("AllowAllOrigins");

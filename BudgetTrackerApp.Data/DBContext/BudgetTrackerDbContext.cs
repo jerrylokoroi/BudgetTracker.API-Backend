@@ -3,7 +3,7 @@
 public class BudgetTrackerDbContext : DbContext
 {
     public BudgetTrackerDbContext(DbContextOptions<BudgetTrackerDbContext> options)
-        : base(options)
+        : base(options) 
     {
     }
     public DbSet<BudgetTransaction> BudgetTransactions { get; set; }
